@@ -1,0 +1,10 @@
+{
+  "name": "aoc",
+  "version": "1.0.0",
+  "description": "My 2025 Advent of Code solutions",
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.5.3"
+  },
+  "private": true
+}

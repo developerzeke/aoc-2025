@@ -1,0 +1,36 @@
+node_modules/
+.npm
+dist
+
+.env
+.env.*
+!.env.example
+
+
+/tmp
+.DS_Store
+/out-tsc
+
+.idea
+.vscode/*
+.cursor/*
+
+*.tsbuildinfo
+
+node_modules
+
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
+/dist
+
+# OS
+Thumbs.db
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
