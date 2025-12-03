@@ -1,4 +1,15 @@
-export const input = `L10
+export const sampleInput = `L68
+L30
+R48
+L5
+R60
+L55
+L1
+L99
+R14
+L82`;
+
+export const challengeInput = `L10
 L24
 R17
 R48
@@ -4133,4 +4144,4 @@ L30
 L9
 R34
 R39
-L35`.split('\n')
+L35`;

@@ -1,19 +1,25 @@
-import {input} from './input'
+import * as inputs from './inputs'
+import {AdventOfCode} from "../utils";
 
-let num = 50; // starts at 50
-let password = 0;
+new AdventOfCode(inputs, {
+  sampleOne: 3,
+  challengeOne: 1007,
+  sampleTwo: 6,
+  challengeTwo: 5820,
+}, (input, {partTwo}) => {
+  let pos = 50; // starts at 50
+  let password = 0;
 
-const tickLeft = () => num = (num === 0 ? 99 : num - 1);
-const tickRight = () => num = (num === 99 ? 0 : num + 1);
+  input.split('\n').forEach(cmd => {
+    const [dir, ...numRaw] = cmd.split('');
+    const num = Number(numRaw.join(''));
+    for (let i = 0; i < num; i++) {
+      if (dir === 'L') pos--; else pos++; // increase or decrease
+      pos = pos === -1 ? 99 : pos === 100 ? 0 : pos; // wrap around if needed
+      if ((i === num - 1 || partTwo) && pos === 0) password++
+      //  ^ last iteration or part two and ^ dial points to 0
+    }
+  })
 
-input.forEach(cmd => {
-  const [dir, ...numRaw] = cmd.split('');
-  let ticksLeft = Number(numRaw.join(''))
-  while (ticksLeft !== 0) {
-    if (dir === 'L') tickLeft(); else tickRight()
-    if (num === 0) password++
-    ticksLeft -= 1
-  }
-})
-
-console.log('RESULT: ', password)
+  return password;
+}).runAll()
