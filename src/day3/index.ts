@@ -1,5 +1,5 @@
 import * as inputs from './inputs';
-import {AdventOfCode} from "../utils";
+import {AdventOfCode} from "../runner";
 
 new AdventOfCode(inputs, {
   sampleOne: 357,

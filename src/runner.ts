@@ -1,5 +1,6 @@
-export type Mode = 'sampleOne' | 'challengeOne' | 'sampleTwo' | 'challengeTwo';
+// Fancy solution runner. Provide inputs, expected outputs, and choose what configurations to run.
 
+export type Mode = 'sampleOne' | 'challengeOne' | 'sampleTwo' | 'challengeTwo';
 export class AdventOfCode<InputType, OutputType> {
   private inputs: {
     challengeInput: InputType;

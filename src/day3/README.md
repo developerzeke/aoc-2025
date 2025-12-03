@@ -1,0 +1,5 @@
+- ## Results
+- 0.13ms - 🎉 sampleOne result: 357
+- 0.48ms - 🎉 challengeOne result: 16973
+- 0.01ms - 🎉 sampleTwo result: 3121910778619
+- 0.71ms - 🎉 challengeTwo result: 168027167146027
