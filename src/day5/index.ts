@@ -14,7 +14,7 @@ new AdventOfCode(inputs, {
   } else {
     // PART TWO
 
-    // ORIGINAL SOLUTION (0.3ms):
+    // ORIGINAL SOLUTION (~0.3ms):
     //    let prev: number[];
     //    return input.split('\n\n')[0].trim().split('\n').map(r => r.split('-').map(Number)).sort((a, b) => a[0] - b[0]).map((range) => {
     //      if (prev && prev[1] + 1 > range[1]) return false;
@@ -23,19 +23,15 @@ new AdventOfCode(inputs, {
     //      return range;
     //    }).filter(Boolean).reduce((acc, r) => acc + r[1] - r[0] + 1, 0)
 
-    // OPTIMIZED VERSION (0.1ms):
-    return input.split('\n\n')[0].trim().split('\n').map(r => r.split('-').map(Number)) // get all the ranges as number[][]
+    // READABLE OPTIMIZED VERSION (~0.1ms):
+    return input.split('\n\n')[0].split('\n').map(r => r.split('-').map(Number)) // get all the ranges as number[][]
       .sort((a, b) => a[0] - b[0]) // sort them by the first number
-      .reduce(({prev, acc}, range) => {
-        if (prev + 1 > range[1]) return {prev, acc}; // if the end of the prev array plus one is greater than the end of this array, omit the range entirely
-        if (range[0] <= prev) range = [prev + 1, range[1]]; // if the start of this array is less than the previous range's end, set the start to be the previous range + 1 so that there's no overlap
-        return {
-          prev: range[1], // the end of this range
-          acc: acc + range[1] - range[0] + 1 // the total span of this array
-        }
-      }, {acc: 0, prev: -Infinity} as { prev: number, acc: number }).acc;
+      .reduce(({p, a}, r) => p + 1 > r[1] ? {p, a} : { // if the end of the prev array plus one is greater than the end of this array (aka this array is engulfed by the previous array), omit the range entirely
+        p: r[1], // the end of this range
+        a: a + r[1] - (r[0] <= p ? p + 1 : r[0]) + 1 // the total span of this array
+      }, {a: 0, p: 0}).a;
 
-    // MINIFIED OPTIMIZED VERSION:
-    // return input.split("\n\n")[0].trim().split("\n").map(r=>r.split("-").map(Number)).sort((a,b)=>a[0]-b[0]).reduce(({prev,acc},range)=>{if(prev+1>range[1])return{prev,acc};if(range[0]<=prev)range=[prev+1,range[1]];return{prev:range[1],acc:acc+range[1]-range[0]+1}},{acc:0,prev:-Infinity}).acc
+    // MINIFIED OPTIMIZED VERSION (~0.1ms):
+    // return input.split('\n\n')[0].split('\n').map(x=>x.split('-').map(Number)).sort(([a],[b])=>a-b).reduce(([p,a],[s,e])=>p+1>e?[p,a]:[e,a+e-(s<=p?p+1:s)+1],[0,0])[1]
   }
 }).runAll()
